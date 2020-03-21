@@ -3,6 +3,10 @@ Nom : ROLLAND Julien
 Groupe : 1bis
 *)
 
+(*
+1)
+*)
+
 let rec gcd a b =
   if a = b then a
   else if a > b then gcd (a - b) b
@@ -12,6 +16,7 @@ let rec gcd a b =
 Printf.printf "pgcd(24, 64) = %d\n" (gcd 24 64);;
 
 (*
+2)
 Au debut a = 24, b = 64, a < b donc gcd b a.
 Ensuite a = 64, b = 24, a > b donc gcd (a - b) b.
 a = 40, b = 24, a > b donc gcd (a - b) b.
@@ -22,10 +27,17 @@ a = 16, b = 8, a > b donc gcd (a - b) b.
 a = 8, b = 8, a = b donc le resultat est a = b = 8.
 *)
 
+
+(*
+3)
+*)
 let prime a b =
   (gcd a b) = 1
 ;;
 
+(*
+4)
+*)
 let phi n =
   let rec aux s acc = 
     if s > n then acc

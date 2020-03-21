@@ -3,6 +3,9 @@ Nom : ROLLAND Julien
 Groupe : 1bis
 *)
 
+(*
+Quelques fonction non demandé mais utile pour la suite.
+*)
 let length l = 
   let rec length l acc =
     match l with
@@ -40,12 +43,18 @@ let rec print_board board =
 
 type plays = Flip of int;;
 
+(*
+1)
+*)
 let flip c =
   match c with
   |Head -> Tails
   |Tails -> Head
 ;;
 
+(*
+2)
+*)
 let play plays board =
   let len = length board in
   let Flip n = plays in
@@ -64,12 +73,18 @@ let play plays board =
   reverse inv
 ;;
 
+(*
+3)
+*)
 let rec play_multiple plays_l board =
   match plays_l with
   |[] -> board
   |hd::lt -> play_multiple lt (play hd board)
 ;;
 
+(*
+4)
+*)
 let rec is_wining board =
   match board with
   |[] -> true
@@ -78,16 +93,26 @@ let rec is_wining board =
 ;;
 
 let b = [Head; Tails; Head; Tails];;
+
+(*
+5)
+*)
 let pl = [Flip 1; Flip 2];;
 
 print_bool (is_wining (play_multiple pl b));;
 
+(*
+6)
+*)
 let has_sol board =
   match board with
   |x1::x2::x3::x4::lt -> (x1 = x3) = (x2 = x4)
   |_ -> failwith "Board size not suported"
 ;;
 
+(*
+7)
+*)
 let find_sol board = 
   if not (has_sol board) then failwith "There is no solution";
   []
