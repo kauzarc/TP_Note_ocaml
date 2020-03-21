@@ -104,7 +104,7 @@ print_bool (is_wining (play_multiple pl b));;
 
 (*
 6)
-On remarque qu'il y'a une equivalence entre "(x1 = x3) = (x2 = x4)" et "le nombre de Tails de x1::x3 = le nombre de Tails de x2::x4"
+On remarque qu'il y'a une equivalence entre "(x1 = x3) = (x2 = x4)" et "parité du nombre de Tails de x1::x3 = parité du nombre de Tails de x2::x4"
 *)
 let has_sol board =
   match board with
@@ -116,15 +116,15 @@ let has_sol board =
 7)
 L'idée est de parcourir le tableau et de "pousser" les Tails vers la fin. (Tails::Head::Head + Flip 0 -> Head::Tails::Head)
 Si deux Tails sont cote a cote, on peut alors les enlever. (Tails::Tails::Head + Flip 0 -> Head::Head::Head)
-Et si il reste un seul a la fin alors il n'y as pas de solution.
+Et si il reste un seul Tails a la fin alors il n'y as pas de solution.
 *)
 let find_sol board = 
   let rec aux l count result =
     match l with
     |[] -> result
+    |Head::lt -> aux lt (count + 1) result
     |Tails::[] -> failwith "No solution"
     |Tails::lt -> let p = Flip count in aux (play_multiple (p::result) board) 0 (p::result)
-    |Head::lt -> aux lt (count + 1) result
   in
 
   aux board 0 []
