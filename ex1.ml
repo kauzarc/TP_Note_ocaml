@@ -25,10 +25,34 @@ Cette fonction devrais declancher le warning.
 
 (*
 4)
-r1 n'est pas recursive terminal car elle n'est pas recursive. Elle apelle f1.
-r2 n'est pas recursive non plus. Elle n'apelle que r3 et les type ne coresponde meme pas.
-r3 n'est pas recursive non plus mais aux est recursive terminale. Car il n'est pas necessaire de conserver les valeur de la pile pour evaluer "aux tl (acc+hd)" ou "aux tl acc".
-r4 n'est pas recursive non plus. Elle n'apelle aucune autres fonction durant son execution.
+let rec r1 x =
+  match x with
+    | 0 -> 1
+    | _ -> 10 + r1 (x-1)
+
+Pas terminal, car "r1 (x - 1)" n'est pas la derniere instruction de la fonction a etre evaluée. C'est "(10) + (r1 (x-1))".
+
+let rec r2 a b =
+  match a with
+    | true -> true
+    | false -> a || (r2 (not a) (not b))
+  
+Pas terminal, car "r2 (not a) (not b)" n'est pas la derniere instruction de la fonction a etre evaluée. C'est "(a) || (r2 (not a) (not b))".
+
+let r3 x l =
+  let rec aux y acc =
+    match y with
+      | [] -> acc
+      | hd::tl -> if hd > x then aux tl (acc+hd) else aux tl acc
+  in aux l 0
+
+Pas recursive mais "aux" est recursive terminal, car "aux tl (acc+hd)" ou "aux tl acc" serons les derniere instruction a etre evaluée.
+
+let rec r4 x y =
+  if x +. 1. < y then 3
+  else 5
+
+Pas recursive, car la fonction ne fait aucun appel a elle meme.
 *)
 
 (*
