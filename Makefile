@@ -9,3 +9,6 @@ all : $(EXE) clean
 clean:
 	rm *.cmi
 	rm *.cmo
+
+clean_exe:
+	rm $(EXE)
